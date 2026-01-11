@@ -4,6 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+use Illuminate\Support\Str;
+use Illuminate\Database\Schema\Blueprint;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -19,6 +22,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // pour mettre les id à uuid par défaut
+        Blueprint::macro('uuidPrimary', function ($name = 'id') {
+        return $this->uuid($name)->primary();
+    });
     }
 }
